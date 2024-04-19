@@ -9,7 +9,7 @@
 // "TooSmall". Please add it where needed!
 const MyNumberError = error{
     TooBig,
-    ???,
+    TooSmall,
     TooFour,
 };
 
@@ -26,7 +26,7 @@ pub fn main() void {
         if (number_error == MyNumberError.TooBig) {
             std.debug.print(">4. ", .{});
         }
-        if (???) {
+        if (number_error == MyNumberError.TooSmall) {
             std.debug.print("<4. ", .{});
         }
         if (number_error == MyNumberError.TooFour) {
@@ -39,7 +39,7 @@ pub fn main() void {
 
 // Notice how this function can return any member of the MyNumberError
 // error set.
-fn numberFail(n: u8) MyNumberError {
+fn numberFail(n: u8) MyNumberError!u8 {
     if (n > 4) return MyNumberError.TooBig;
     if (n < 4) return MyNumberError.TooSmall; // <---- this one is free!
     return MyNumberError.TooFour;
