@@ -136,15 +136,12 @@ pub fn main() !void {
     ;
 
     // now the tokenizer, but what do we need here?
-    var it = std.mem.tokenize(u8, poem, " ,");
+    var it = std.mem.tokenize(u8, poem, " ,;!\n");
 
     // print all words and count them
     var cnt: usize = 0;
-    while (it.next()) |word| {
-        const w = std.mem.tokenize(u8, word, ";");
-        const x = std.mem.tokenize(u8, w, "!");
-        cnt += 1;
-        print("{s}\n", .{x});
+    while (it.next()) |word| : (cnt += 1) {
+        print("{s}\n", .{word});
     }
 
     // print the result
