@@ -1,6 +1,4 @@
 //
-// Remember using if/else statements as expressions like this?
-//
 //     var foo: u8 = if (true) 5 else 0;
 //
 // Zig also lets you use for and while loops as expressions.
@@ -47,7 +45,8 @@ pub fn main() void {
     // return it from the for loop.
     const current_lang: ?[]const u8 = for (langs) |lang| {
         if (lang.len == 3) break lang;
-    };
+    } else null;
+   
 
     if (current_lang) |cl| {
         print("Current language: {s}\n", .{cl});

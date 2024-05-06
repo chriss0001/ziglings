@@ -49,17 +49,17 @@ const RubberDuck = struct {
         self.location_y += y;
     }
 
-    fn quack(self: RubberDuck) void {
+    fn quack(_: RubberDuck) void {
         // Assigning an expression to '_' allows us to safely
         // "use" the value while also ignoring it.
-        _ = self;
+        //_ = self;
         print("\"Squeek!\" ", .{});
     }
 
-    fn listen(self: RubberDuck, dev_talk: []const u8) void {
+    fn listen(self: RubberDuck, _: []const u8) void {
         // Listen to developer talk about programming problem.
         // Silently contemplate problem. Emit helpful sound.
-        _ = dev_talk;
+        // _ = dev_talk;
         self.quack();
     }
 };
@@ -123,8 +123,10 @@ fn isADuck(possible_duck: anytype) bool {
     // Please make sure MyType has both waddle() and quack()
     // methods:
     const MyType = @TypeOf(possible_duck);
-    const walks_like_duck = ???;
-    const quacks_like_duck = ???;
+    //const walks_like_duck = if (MyType == Duck or MyType == RubberDuck) true else false;
+    //const quacks_like_duck = if (MyType == Duck or MyType == RubberDuck) true else false;
+    const walks_like_duck = @hasDecl(MyType, "waddle");
+    const quacks_like_duck = @hasDecl(MyType, "quack");
 
     const is_duck = walks_like_duck and quacks_like_duck;
 
